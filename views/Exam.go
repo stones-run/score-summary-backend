@@ -33,7 +33,7 @@ func (e *Exam) List(c *gin.Context) {
 		var data []gradeData
 		for _, gradeConst := range gradesConst {
 			score := models.Score{}
-			db = database.DB.Where("grade = ? and exam_id = ?", gradeConst, exam.ID).First(&score)
+			db = database.DB.Where("grade = ? and exam_id = ?", gradeConst, exam.ID).Find(&score)
 			if db.RowsAffected != 0 {
 				data = append(data, gradeData{gradeConst, true})
 			} else {
@@ -63,12 +63,7 @@ func (e *Exam) Add(c *gin.Context) {
 
 func (e *Exam) Delete(c *gin.Context) {
 	id := c.Param("id")
-	result := database.DB.First(&models.Exam{}, id)
-	if result.Error == nil {
-		response.F(c, "不存在的考试")
-		return
-	}
-	result = database.DB.Delete(&models.Exam{}, id)
+	result := database.DB.Delete(&models.Exam{}, id)
 	if result.Error != nil {
 		response.F(c, "删除考试失败")
 		return

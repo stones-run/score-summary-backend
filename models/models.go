@@ -16,14 +16,14 @@ func (r *Exam) TableName() string {
 }
 
 type Score struct {
-	ID          int            `gorm:"primaryKey;autoIncrement;comment:'主键'" json:"id"`
-	ExamId      int            `gorm:"not null;comment:'考试ID'" json:"exam_id"`
-	Grade       uint8          `gorm:"not null;comment:'年级'" json:"grade"`
-	StudentNum  string         `gorm:"not null;comment:'学号'" json:"student_num"`
-	StudentName string         `gorm:"not null;comment:'姓名'" json:"student_name"`
-	Class       uint8          `gorm:"not null;comment:'班级'" json:"class"`
-	Score       string         `gorm:"not null;comment:'成绩'" json:"-"`
-	ScoreJSON   map[string]int `gorm:"-" json:"score"`
+	ID          int                `gorm:"primaryKey;autoIncrement;comment:'主键'" json:"id"`
+	ExamId      int                `gorm:"not null;comment:'考试ID'" json:"exam_id"`
+	Grade       uint8              `gorm:"not null;comment:'年级'" json:"grade"`
+	StudentNum  int                `gorm:"not null;comment:'学号'" json:"student_num"`
+	StudentName string             `gorm:"not null;comment:'姓名'" json:"student_name"`
+	Class       uint8              `gorm:"not null;comment:'班级'" json:"class"`
+	Score       string             `gorm:"not null;comment:'成绩'" json:"-"`
+	ScoreJSON   map[string]float32 `gorm:"-" json:"score"`
 }
 
 // BeforeSave 钩子函数，在保存数据之前自动调用

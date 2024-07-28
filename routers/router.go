@@ -16,7 +16,14 @@ func LoadUsersRoutes(r *gin.Engine) {
 	score := views.Score{}
 	scoreGroup := r.Group("/score")
 	{
-		scoreGroup.GET("", score.GradeScore)
+		scoreGroup.GET("/:examId/:grade", score.GradeScore)
 		scoreGroup.POST("", score.Save)
 	}
+	tendency := views.Tendency{}
+
+	tendencyGroup := r.Group("/tendency")
+	{
+		tendencyGroup.GET("/:studentNum", tendency.Tendency)
+	}
+
 }
